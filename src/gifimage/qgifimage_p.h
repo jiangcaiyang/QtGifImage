@@ -26,6 +26,11 @@
 #define QGIFIMAGE_P_H
 
 #include "qgifimage.h"
+
+#ifndef _Bool
+#define _Bool bool
+#endif
+
 #include "gif_lib.h"
 
 #include <QVector>
