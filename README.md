@@ -1,7 +1,11 @@
 Documentation: http://qtgifimage.debao.me ( invalided at 5th, Dec. 2017 )
+
 New Documentation: http://doc.qtdream.com/qtgifimage
+
 Website: http://qtdream.com
-Thanks to: jiangcaiyang
+
+Modified by: jiangcaiyang
+
 Get compiled for Qt 5.9.2 Mac OSX and Windows 10
 
 Qt Gif Image is a Qt library that can read and write Gif files.
