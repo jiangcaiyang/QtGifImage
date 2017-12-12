@@ -223,7 +223,8 @@ bool QGifImagePrivate::load(QIODevice *device)
     return true;
 }
 
-bool QGifImagePrivate::save(QIODevice *device) const
+bool QGifImagePrivate::save( QIODevice* device,
+                             Qt::ImageConversionFlags flags ) const
 {
     int error;
     GifFileType *gifFile = EGifOpen(device, writeToIODevice, &error);
@@ -249,9 +250,9 @@ bool QGifImagePrivate::save(QIODevice *device) const
         QImage image = frameInfo.image;
         if (image.format() != QImage::Format_Indexed8) {
             if (!globalColorTable.isEmpty())
-                image = image.convertToFormat(QImage::Format_Indexed8, globalColorTable);
+                image = image.convertToFormat(QImage::Format_Indexed8, globalColorTable, flags );
             else
-                image = image.convertToFormat(QImage::Format_Indexed8);
+                image = image.convertToFormat(QImage::Format_Indexed8, flags );
         }
 
         SavedImage *gifImage = gifFile->SavedImages + idx;
@@ -620,15 +621,19 @@ void QGifImage::setFrameTransparentColor(int index, const QColor &color)
 
 /*!
     Saves the gif image to the file with the given \a fileName.
+    \a flags specifies the conversion method when image data transfered
+    to file.
     Returns \c true if the image was successfully saved; otherwise
     returns \c false.
+    \sa {Image Formats}{Image Formats}
 */
-bool QGifImage::save(const QString &fileName) const
+bool QGifImage::save( const QString &fileName,
+                      Qt::ImageConversionFlags flags ) const
 {
     Q_D(const QGifImage);
     QFile file(fileName);
     if (file.open(QIODevice::WriteOnly))
-        return d->save(&file);
+        return d->save( &file, flags );
 
     return false;
 }
