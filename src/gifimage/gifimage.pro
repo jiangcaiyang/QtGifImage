@@ -1,6 +1,7 @@
+TARGET = QtGifImage
+
 load(qt_module)
 
-TARGET = QtGifImage
 CONFIG += build_gifimage_lib
 include(qtgifimage.pri)
 
